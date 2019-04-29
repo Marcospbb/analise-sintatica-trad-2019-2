@@ -3,8 +3,12 @@
 %}
 %%
 (\+|-)?([0-9]{1,})((\.)?[0-9]{1,})?			{return NUM;}
-("Leia")                                    {return LEIA;}
+("leia")                                    {return LEIA;}
+("escreva")                                 {return ESCREVA;}
 [a-zA-Z][a-zA-Z0-9]*	                    {return ID;}
+[+|-]                                       {return OPA;}
+[*|/]                                       {return OPM;}
+\"(\\.|[^"])*\                              {return STRING;}
 [ \t]+			                            {;}
 .|\n			                            {return yytext[0];}
 %%

@@ -9,6 +9,10 @@ int yylex ();
 %token NUM
 %token ID
 %token LEIA
+%token ESCREVA
+%token OPA
+%token OPM
+%token STRING
 %%
 
 input:    /* empty */
@@ -23,13 +27,36 @@ lista_cmds:	cmd			{;}
 		| cmd ';' lista_cmds	{;}
 ;
 cmd:		ID '=' exp		{;}
-        | leia          {;}
+        |   leia          {;}
+        |   escreva       {;}
 ;
-leia:   LEIA '(' ID ')' {;} /*Perguntar se "leia" é um token ou se eh definido na gramatica */
+leia:   LEIA '(' lista_variaveis ')' {;} /*Perguntar se "leia" é um token ou se eh definido na gramatica */
 ;
-exp:	NUM			    {;}
-		| ID			{;}
-		| exp exp '+'   {;}
+escreva: ESCREVA '(' lista_output ')' {;}
+;
+lista_variaveis: ID {;}
+                | ID ',' lista_variaveis {;}
+;
+lista_output: output    {;}
+              | output ',' lista_output {;}
+;
+output: exp {;}
+        /*| '"' STRING '"' {;} */
+;
+exp:
+	termo 			{;}
+    | exp OPA termo {;}
+;
+
+termo:
+	fator           	{;}
+    | termo OPM fator 	{;}
+;
+
+fator:
+	NUM           	{;}
+	| ID 			{;}
+    | '(' exp ')'   {;}
 ;
 %%
 int main (int argc, char *argv[])
