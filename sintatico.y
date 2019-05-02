@@ -15,13 +15,7 @@ int yylex ();
 %token STRING
 %%
 
-input:    /* empty */
-        | input line
-;
-line:     '\n'
-        | programa '\n'  { printf ("Programa sintaticamente correto!\n"); }
-;
-programa:	'{' lista_cmds '}'	{;}
+programa:	'{' lista_cmds '}'	{printf ("Programa sintaticamente correto!\n");}
 ;
 lista_cmds:	cmd			{;}
 		| cmd ';' lista_cmds	{;}
@@ -61,7 +55,7 @@ fator:
 %%
 int main (int argc, char *argv[])
 {
-    yydebug = 1;
+    yydebug = 0;
     if (argc == 1) {
         yyin = fopen("entrada.txt", "r");
     }
@@ -76,5 +70,5 @@ int main (int argc, char *argv[])
 }
 int yyerror (char *s) /* Called by yyparse on error */
 {
-	printf ("Problema com a analise sintatica!\n", s);
+	printf ("Problema com a analise sintatica!\n");
 }
