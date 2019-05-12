@@ -1,3 +1,6 @@
+
 {
-    a=n+b
+    a=2+n*5;
+    leia(n);
+    escreva(5+n)
 }
