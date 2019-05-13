@@ -25,7 +25,7 @@ bloco_var: /*empty*/
 					| VAR '{' lista_decl_var '}' {;}
 ;
 lista_decl_var: decl_var {;}
-						| decl ';' lista_decl_var {;}
+						| decl_var ';' lista_decl_var {;}
 ;
 decl_var: TIPO lista_var {;}
 ;
@@ -51,8 +51,8 @@ output: exp {;}
 ;
 exp:
 			termo 				{;}
-    | exp '+' termo {;}
-		| exp '-' termo {;}
+    | exp opa termo {;}
+		// | exp '-' termo {;}
 ;
 
 termo:
@@ -61,15 +61,20 @@ termo:
 		| termo '/' fator 	{;}
 ;
 
+opa:
+      '+' {;}
+    | '-' {;}
+
 fator:
-	NUM           	{;}
+    NUM           {;}
+	| opa NUM       {;}
 	| ID 						{;}
   | '(' exp ')'   {;}
 ;
 %%
 int main (int argc, char *argv[])
 {
-    yydebug = 1;
+    yydebug = 0;
     if (argc == 1) {
         yyin = fopen("entrada.txt", "r");
     }
