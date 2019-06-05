@@ -15,6 +15,8 @@ int yylex ();
 %token STRING
 %token TIPO
 %token VAR
+%token OPR
+%token ENQUANTO
 
 %%
 
@@ -35,6 +37,7 @@ lista_cmds:	cmd			{;}
 cmd:		ID '=' exp		{;}
         |   leia          {;}
         |   escreva       {;}
+        |   enquanto      {;}
 ;
 leia:   LEIA '(' lista_var ')' {;} /*Perguntar se "leia" é um token ou se eh definido na gramatica */
 ;
@@ -48,6 +51,12 @@ lista_output: 	output    							{;}
 ;
 output: exp {;}
         /*| '"' STRING '"' {;} */
+;
+exp_rel:
+          exp OPR exp {;}
+;
+enquanto: ENQUANTO exp_rel '{'lista_cmds'}'
+          | ENQUANTO exp '{'lista_cmds'}'
 ;
 exp:
 			termo 				{;}
