@@ -26,18 +26,22 @@ programa:	bloco_var
 bloco_var: /*empty*/
 					| VAR '{' lista_decl_var '}' {;}
 ;
-lista_decl_var: decl_var {;}
+lista_decl_var: decl_var ';'	 {;}
 						| decl_var ';' lista_decl_var {;}
 ;
 decl_var: TIPO lista_var {;}
 ;
-lista_cmds:	cmd			{;}
+lista_cmds:	cmd	';'		{;}
 		| cmd ';' lista_cmds	{;}
+    | cmd_bloco {;}
+    | cmd_bloco  lista_cmds {;}
 ;
 cmd:		ID '=' exp		{;}
         |   leia          {;}
         |   escreva       {;}
-        |   enquanto      {;}
+;
+cmd_bloco: enquanto {;}
+
 ;
 leia:   LEIA '(' lista_var ')' {;} /*Perguntar se "leia" é um token ou se eh definido na gramatica */
 ;
@@ -56,7 +60,6 @@ exp_rel:
           exp OPR exp {;}
 ;
 enquanto: ENQUANTO exp_rel '{'lista_cmds'}'
-          | ENQUANTO exp '{'lista_cmds'}'
 ;
 exp:
 			termo 				{;}

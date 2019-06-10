@@ -2,11 +2,12 @@
 {
     a=-2+n*5;
     leia(n);
-    escreva(5+n);
-    enquanto -5*4+(r+8) > 2{
+        enquanto -5*4+(r+8) > 2{
         a=7;
-        enquanto 5 > 2{
-            a=7
+        enquanto 5 > 2
+            a=7;
         }
     }
+    escreva(5+n);
+
 }
