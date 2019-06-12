@@ -2,10 +2,22 @@
 {
     a=-2+n*5;
     leia(n);
-        enquanto -5*4+(r+8) > 2{
+    enquanto ((-5*4+(r+8)) > 2){
         a=7;
-        enquanto 5 > 2
+        enquanto (5 > 2) {
             a=7;
+
+
+        }
+        se (7 > x) {
+            a= 9;
+            
+        }
+        senao{leia(a);}
+        enquanto (5 > 2) {
+            a=7;
+
+
         }
     }
     escreva(5+n);

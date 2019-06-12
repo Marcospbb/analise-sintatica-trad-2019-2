@@ -17,6 +17,8 @@ int yylex ();
 %token VAR
 %token OPR
 %token ENQUANTO
+%token SE
+%token SENAO
 
 %%
 
@@ -41,7 +43,7 @@ cmd:		ID '=' exp		{;}
         |   escreva       {;}
 ;
 cmd_bloco: enquanto {;}
-
+           | se_entao {;}
 ;
 leia:   LEIA '(' lista_var ')' {;} /*Perguntar se "leia" é um token ou se eh definido na gramatica */
 ;
@@ -59,7 +61,10 @@ output: exp {;}
 exp_rel:
           exp OPR exp {;}
 ;
-enquanto: ENQUANTO exp_rel '{'lista_cmds'}'
+enquanto: ENQUANTO '(' exp_rel ')' '{'lista_cmds'}' {;}
+;
+se_entao: SE '(' exp_rel ')' '{'lista_cmds'}' {;}
+          | SE '(' exp_rel ')' '{'lista_cmds'}' SENAO '{'lista_cmds'}' {;}
 ;
 exp:
 			termo 				{;}
